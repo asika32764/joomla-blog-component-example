@@ -25,25 +25,11 @@ class BlogModelArticle extends JModelLegacy
 
 	public function save($data)
 	{
-		$db = $this->_db;
+		$table = $this->getTable('Article', 'BlogTable');
 
-		$id = $data['id'];
+		$table->bind($data);
 
-		$data = (object) $data;
-
-		// 有 id 時用 update
-		if ($id)
-		{
-			$db->updateObject('#__blog_articles', $data, 'id');
-		}
-
-		// 沒有 id 時用 insert
-		else
-		{
-			$db->insertObject('#__blog_articles', $data);
-		}
-
-		return true;
+		return $table->store();
 	}
 
 	public function delete($id)
