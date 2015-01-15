@@ -34,8 +34,8 @@ class BlogModelArticle extends JModelLegacy
 
 	public function delete($id)
 	{
-		$sql = "DELETE FROM #__blog_articles WHERE id = " . (int) $id;
+		$table = $this->getTable('Article', 'BlogTable');
 
-		return $this->_db->setQuery($sql)->execute();
+		return $table->delete($id);
 	}
 }
