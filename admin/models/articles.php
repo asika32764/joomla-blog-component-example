@@ -9,11 +9,14 @@ class BlogModelArticles extends JModelLegacy
 	{
 		$db = JFactory::getDbo();
 
-		// Or using $db = $this->_db;
+		$query = $db->getQuery(true);
 
-		$sql = "SELECT * FROM #__blog_articles";
+		$query->select('*')
+			->from('#__blog_articles')
+			->where('published >= 1')
+			->order('id ASC');
 
-		$db->setQuery($sql);
+		$db->setQuery($query);
 
 		// If not thing found, return empty array.
 		return $db->loadObjectList() ? : array();
