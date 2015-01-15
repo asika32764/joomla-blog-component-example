@@ -5,9 +5,14 @@ defined('_JEXEC') or die;
 
 class BlogModelArticle extends JModelLegacy
 {
+	public function getTable($name = 'Article', $prefix = 'BlogTable', $options = array())
+	{
+		return parent::getTable($name, $prefix, $options);
+	}
+
 	public function getItem()
 	{
-		$table = $this->getTable('Article', 'BlogTable');
+		$table = $this->getTable();
 
 		$input = JFactory::getApplication()->input;
 
@@ -25,7 +30,7 @@ class BlogModelArticle extends JModelLegacy
 
 	public function save($data)
 	{
-		$table = $this->getTable('Article', 'BlogTable');
+		$table = $this->getTable();
 
 		$table->bind($data);
 
@@ -34,7 +39,7 @@ class BlogModelArticle extends JModelLegacy
 
 	public function delete($id)
 	{
-		$table = $this->getTable('Article', 'BlogTable');
+		$table = $this->getTable();
 
 		return $table->delete($id);
 	}
