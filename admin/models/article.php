@@ -27,35 +27,21 @@ class BlogModelArticle extends JModelLegacy
 
 		$id = $data['id'];
 
-		// 把 $data 內的每個元素用單引號包起來，並且跳脫不合法字元
-		foreach ($data as &$value)
-		{
-			$value = $db->quote($value);
-		}
+		$data = (object) $data;
 
 		// 有 id 時用 update
 		if ($id)
 		{
-			$sql = "UPDATE #__blog_articles SET "
-				. "title = " . $data['title']
-				. ", alias = " . $data['alias']
-				. ", created = " . $data['created']
-				. ", introtext = " . $data['introtext']
-				. ", `fulltext` = " . $data['fulltext']
-				. " WHERE id = " . $data['id'];
+			$db->updateObject('#__blog_articles', $data, 'id');
 		}
 
 		// 沒有 id 時用 insert
 		else
 		{
-			$sql = "INSERT INTO #__blog_articles"
-				. " (title, alias, created, introtext, `fulltext`) "
-				. " VALUES (" . implode(', ', $data) . ")";
+			$db->insertObject('#__blog_articles', $data);
 		}
 
-		$db->setQuery($sql);
-
-		return $db->execute();
+		return true;
 	}
 
 	public function delete($id)
