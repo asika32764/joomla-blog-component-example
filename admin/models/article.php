@@ -7,6 +7,8 @@ class BlogModelArticle extends JModelLegacy
 {
 	public function getItem()
 	{
+		$table = $this->getTable('Article', 'BlogTable');
+
 		$input = JFactory::getApplication()->input;
 
 		$id = $input->get('id');
@@ -16,9 +18,9 @@ class BlogModelArticle extends JModelLegacy
 			return false;
 		}
 
-		$sql = "SELECT * FROM #__blog_articles WHERE id = " . $id;
+		$table->load($id);
 
-		return $this->_db->setQuery($sql)->loadObject();
+		return $table;
 	}
 
 	public function save($data)
