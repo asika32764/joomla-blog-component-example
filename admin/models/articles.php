@@ -8,9 +8,8 @@ class BlogModelArticles extends JModelLegacy
 	protected function populateState()
 	{
 		$app = JFactory::getApplication();
-		$input = $app->input;
 
-		$this->setState('filter.search', $input->getString('filter_search'));
+		$this->setState('filter.search', $app->getUserStateFromRequest('blog.articles.search', 'filter_search'));
 	}
 
 	public function getItems()
