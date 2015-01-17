@@ -1,12 +1,29 @@
 # Joomla 開發者聖經 範例 Blog 元件
 
-使用方式，從上方下拉選單的 tag 分頁，選擇你想要看的章節。
+## 使用方式
+
+從上方下拉選單的 tag 分頁，選擇你想要看的章節。
 
 ![p-2015-01-17-15](https://cloud.githubusercontent.com/assets/1639206/5788814/1d61134e-9e87-11e4-9e3b-f6c42c30848c.jpg)
 
 進入 admin (後台) 或 site (前台) 目錄，就可以直接觀看原始碼。
 
 ![p-2015-01-17-16](https://cloud.githubusercontent.com/assets/1639206/5788817/52a1d3cc-9e87-11e4-88a3-9325e738450e.jpg)
+
+## 觀看 Commits
+
+點擊左上角 commits 連結
+
+![p-2015-01-17-17](https://cloud.githubusercontent.com/assets/1639206/5788843/3ba3fba8-9e89-11e4-90eb-97e64536f94b.jpg)
+
+可以看到這個裝節的最後幾個 commits
+
+![p-2015-01-17-18](https://cloud.githubusercontent.com/assets/1639206/5788845/3bdf5414-9e89-11e4-9bf2-f36106508dba.jpg)
+
+點擊其中一個 commits 就能夠看到更新過程中的新增修改（還可以留言喔）
+
+![p-2015-01-17-20](https://cloud.githubusercontent.com/assets/1639206/5788844/3bcde224-9e89-11e4-9f3f-ae062d9cd1d2.jpg)
+
 
 ## 安裝方式
 
