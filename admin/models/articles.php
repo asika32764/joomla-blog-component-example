@@ -13,6 +13,9 @@ class BlogModelArticles extends JModelLegacy
 		$this->setState('filter.search', $app->getUserStateFromRequest('blog.articles.search', 'filter_search'));
 		$this->setState('list.ordering', $app->getUserStateFromRequest('blog.articles.ordering', 'filter_order'));
 		$this->setState('list.direction', $app->getUserStateFromRequest('blog.articles.direction', 'filter_order_Dir'));
+
+		$this->setState('list.limit', 5);
+		$this->setState('list.start', $app->getUserStateFromRequest('blog.articles.start', 'limitstart'));
 	}
 
 	public function getItems()
@@ -20,6 +23,9 @@ class BlogModelArticles extends JModelLegacy
 		$db = JFactory::getDbo();
 
 		$query = $db->getQuery(true);
+
+		$limit = (int) $this->getState('list.limit', 5);
+		$start = (int) $this->getState('list.start', 0);
 
 		$ordering = $this->getState('list.ordering', 'id');
 		$direction = $this->getState('list.direction', 'asc');
@@ -40,14 +46,22 @@ class BlogModelArticles extends JModelLegacy
 			$query->where($conditions);
 		}
 
-		$query->select('*')
+		$query->select('SQL_CALC_FOUND_ROWS *')
 			->from('#__blog_articles')
-			// ->where('published >= 1')
 			->order($ordering . ' ' . $direction);
 
-		$db->setQuery($query);
+		$db->setQuery($query, $start, $limit);
 
 		// If not thing found, return empty array.
 		return $db->loadObjectList() ? : array();
+	}
+
+	public function getPagination()
+	{
+		$total = $this->_db->setQuery('SELECT FOUND_ROWS()')->loadResult();
+		$limit = (int) $this->getState('list.limit', 5);
+		$start = (int) $this->getState('list.start', 0);
+
+		return new JPagination($total, $start, $limit);
 	}
 }

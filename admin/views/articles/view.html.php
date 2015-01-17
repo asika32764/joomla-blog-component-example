@@ -9,6 +9,7 @@ class BlogViewArticles extends JViewLegacy
 	{
 		$this->state = $this->get('State');
 		$this->items = $this->get('Items');
+		$this->pagination = $this->get('Pagination');
 
 		$this->addToolbar();
 

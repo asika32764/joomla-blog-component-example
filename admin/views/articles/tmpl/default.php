@@ -62,6 +62,13 @@ $filterPublished = (string) $this->state->get('filter.published', '');
 			</tr>
 		<?php endforeach; ?>
 		</tbody>
+		<tfoot>
+		<tr>
+			<td colspan="10">
+				<?php echo $this->pagination->getListFooter(); ?>
+			</td>
+		</tr>
+		</tfoot>
 	</table>
 
 	<div class="hidden-inputs">
