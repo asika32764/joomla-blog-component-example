@@ -9,6 +9,7 @@ class BlogModelArticles extends JModelLegacy
 	{
 		$app = JFactory::getApplication();
 
+		$this->setState('filter.published', $app->getUserStateFromRequest('blog.articles.published', 'filter_published'));
 		$this->setState('filter.search', $app->getUserStateFromRequest('blog.articles.search', 'filter_search'));
 		$this->setState('list.ordering', $app->getUserStateFromRequest('blog.articles.ordering', 'filter_order'));
 		$this->setState('list.direction', $app->getUserStateFromRequest('blog.articles.direction', 'filter_order_Dir'));
@@ -22,7 +23,13 @@ class BlogModelArticles extends JModelLegacy
 
 		$ordering = $this->getState('list.ordering', 'id');
 		$direction = $this->getState('list.direction', 'asc');
+		$published = $this->getState('filter.published', '');
 		$search = $this->getState('filter.search');
+
+		if ($published !== '')
+		{
+			$query->where('published = ' . $published);
+		}
 
 		if ($search)
 		{

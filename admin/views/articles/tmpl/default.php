@@ -5,6 +5,7 @@ defined('_JEXEC') or die;
 
 $currentOrder = $this->state->get('list.ordering', 'asc');
 $currentDir   = $this->state->get('list.direction', 'asc');
+$filterPublished = (string) $this->state->get('filter.published', '');
 ?>
 <form action="<?php echo JUri::getInstance(); ?>" id="adminForm" name="adminForm" method="post">
 
@@ -14,6 +15,14 @@ $currentDir   = $this->state->get('list.direction', 'asc');
 			<button type="submit" class="btn">
 				<i class="icon-search"></i>
 			</button>
+		</div>
+
+		<div class="pull-right filter-inputs">
+			<select name="filter_published" id="filter_published" onchange="this.form.submit();">
+				<option value="">- 請選擇 -</option>
+				<option value="1" <?php echo ($filterPublished == '1') ? 'selected="selected"' : ''; ?>>發佈</option>
+				<option value="0" <?php echo ($filterPublished == '0') ? 'selected="selected"' : ''; ?>>未發佈</option>
+			</select>
 		</div>
 	</div>
 
@@ -59,7 +68,7 @@ $currentDir   = $this->state->get('list.direction', 'asc');
 		<input type="hidden" name="option" value="com_blog" />
 		<input type="hidden" name="task" value="" />
 
-		<input name="filter_order" type="hidden" value="" />
-		<input name="filter_order_Dir" type="hidden" value="" />
+		<input name="filter_order" type="hidden" value="<?php echo $currentOrder; ?>" />
+		<input name="filter_order_Dir" type="hidden" value="<?php echo $currentDir ?>" />
 	</div>
 </form>
