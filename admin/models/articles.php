@@ -5,11 +5,26 @@ defined('_JEXEC') or die;
 
 class BlogModelArticles extends JModelLegacy
 {
+	protected function populateState()
+	{
+		$app = JFactory::getApplication();
+		$input = $app->input;
+
+		$this->setState('filter.search', $input->getString('filter_search'));
+	}
+
 	public function getItems()
 	{
 		$db = JFactory::getDbo();
 
 		$query = $db->getQuery(true);
+
+		$search = $this->getState('filter.search');
+
+		if ($search)
+		{
+			$query->where('title LIKE "%' . $search . '%"');
+		}
 
 		$query->select('*')
 			->from('#__blog_articles')

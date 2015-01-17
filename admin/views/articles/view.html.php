@@ -7,6 +7,7 @@ class BlogViewArticles extends JViewLegacy
 {
 	public function display($tpl = null)
 	{
+		$this->state = $this->get('State');
 		$this->items = $this->get('Items');
 
 		$this->addToolbar();

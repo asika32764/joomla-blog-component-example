@@ -4,6 +4,16 @@
 defined('_JEXEC') or die;
 ?>
 <form action="<?php echo JUri::getInstance(); ?>" id="adminForm" name="adminForm" method="post">
+
+	<div class="filter-bar">
+		<div class="btn-wrapper input-append">
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" placeholder="搜尋">
+			<button type="submit" class="btn">
+				<i class="icon-search"></i>
+			</button>
+		</div>
+	</div>
+
 	<table class="table table-striped">
 		<thead>
 		<tr>
