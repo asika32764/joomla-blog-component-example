@@ -46,7 +46,7 @@ class BlogModelArticles extends JModelLegacy
 			$query->where($conditions);
 		}
 
-		$query->select('SQL_CALC_FOUND_ROWS *')
+		$query->select('*')
 			->from('#__blog_articles')
 			->order($ordering . ' ' . $direction);
 
@@ -58,7 +58,12 @@ class BlogModelArticles extends JModelLegacy
 
 	public function getPagination()
 	{
-		$total = $this->_db->setQuery('SELECT FOUND_ROWS()')->loadResult();
+		$query = $this->_db->getQuery();
+
+		$query->clear('select')
+			->select('COUNT(*)');
+
+		$total = $this->_db->setQuery($query)->loadResult();
 		$limit = (int) $this->getState('list.limit', 5);
 		$start = (int) $this->getState('list.start', 0);
 
