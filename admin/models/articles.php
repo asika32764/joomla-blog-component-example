@@ -23,7 +23,11 @@ class BlogModelArticles extends JModelLegacy
 
 		if ($search)
 		{
-			$query->where('title LIKE "%' . $search . '%"');
+			$conditions = '(`title` LIKE "%' . $search . '%"';
+			$conditions .= ' OR `introtext` LIKE "%' . $search . '%"';
+			$conditions .= ' OR `fulltext` LIKE "%' . $search . '%")';
+
+			$query->where($conditions);
 		}
 
 		$query->select('*')
