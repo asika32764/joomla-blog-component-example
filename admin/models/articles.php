@@ -35,7 +35,7 @@ class BlogModelArticles extends JModelLegacy
 
 		$query->select('*')
 			->from('#__blog_articles')
-			->where('published >= 1')
+			// ->where('published >= 1')
 			->order($ordering . ' ' . $direction);
 
 		$db->setQuery($query);

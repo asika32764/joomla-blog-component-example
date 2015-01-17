@@ -27,6 +27,7 @@ class BlogControllerArticle extends JControllerLegacy
 		$data['title']   = $post->getString('title');
 		$data['alias']   = $post->getString('alias');
 		$data['created'] = $post->getString('created');
+		$data['published'] = $post->getInt('published');
 
 		// HTML 資料必須用 getRaw()，不然會被過濾掉
 		$data['introtext'] = $post->getRaw('introtext');
