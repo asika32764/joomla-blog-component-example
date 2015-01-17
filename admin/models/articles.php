@@ -10,6 +10,8 @@ class BlogModelArticles extends JModelLegacy
 		$app = JFactory::getApplication();
 
 		$this->setState('filter.search', $app->getUserStateFromRequest('blog.articles.search', 'filter_search'));
+		$this->setState('list.ordering', $app->getUserStateFromRequest('blog.articles.ordering', 'filter_order'));
+		$this->setState('list.direction', $app->getUserStateFromRequest('blog.articles.direction', 'filter_order_Dir'));
 	}
 
 	public function getItems()
@@ -18,6 +20,8 @@ class BlogModelArticles extends JModelLegacy
 
 		$query = $db->getQuery(true);
 
+		$ordering = $this->getState('list.ordering', 'id');
+		$direction = $this->getState('list.direction', 'asc');
 		$search = $this->getState('filter.search');
 
 		if ($search)
@@ -32,7 +36,7 @@ class BlogModelArticles extends JModelLegacy
 		$query->select('*')
 			->from('#__blog_articles')
 			->where('published >= 1')
-			->order('id ASC');
+			->order($ordering . ' ' . $direction);
 
 		$db->setQuery($query);
 
